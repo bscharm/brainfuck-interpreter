@@ -18,7 +18,7 @@ var _ = Describe("BrainfuckInterpreter", func() {
 	})
 
 	Describe("readChar", func() {
-		It("stores the active buf in memory at current dp", func() {
+		It("reads into buf and stores the value in memory at current dp", func() {
 			reader := strings.NewReader(">")
 			machine := &Machine{
 				input: reader,
@@ -26,12 +26,13 @@ var _ = Describe("BrainfuckInterpreter", func() {
 				dp:    4,
 			}
 			machine.readChar()
+			Ω(machine.buf[0]).Should(Equal(byte(62)))
 			Ω(machine.memory[4]).Should(Equal(62))
 		})
 	})
 
 	Describe("putChar", func() {
-		It("writes the active buf from memory at current dp", func() {
+		It("puts current value in memory at dp into buf and writes to output", func() {
 			var b bytes.Buffer
 			machine := &Machine{
 				output: &b,

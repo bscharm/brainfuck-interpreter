@@ -36,6 +36,10 @@ func (m *Machine) Execute() {
 			m.dp++
 		case '<':
 			m.dp--
+		case ',':
+			m.readChar()
+		case '.':
+			m.putChar()
 		}
 		m.ip++
 	}
